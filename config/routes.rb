@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'tweets'      => 'tweets#index'           #ツイート一覧画面
+  #URLのパス        →  コントローラ#アクション
+
+  get 'tweets/new'  => 'tweets#new'   #ツイート投稿画面
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

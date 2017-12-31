@@ -1,0 +1,115 @@
+1 rails new アプリケーション名
+
+
+
+3 gem 'gem名'
+  #Gemの追加
+
+4 bundle update
+# gemfileに記載した内容をgemfile.lock に反映させる
+
+5 bundle install
+# gemfileの内容に従ってGemをinstall
+
+6 rake de:create
+# データベースを新規作成 database.ymlが内容
+
+7 cd~
+  mysql.server start
+
+8 cd =/projexts/pictweet
+  rails g controller コントローラ名
+  # コントローラを作成
+  rails d controller コントローラ名
+  # コントローラを削除
+
+9 URL >  ルーティング ＞ コントローラ > ビュー(htmlとlayout の流れ
+  ･localhost:3000/tweets
+
+  ･config/routes.rb
+    Rails application.routes.draw do
+      get 'tweets' => 'tweets#index'
+
+  ･app/controllers/tweets_controller.rb
+    class TweetController < ApplicationController
+      def index
+      end
+
+  ･app/views/tweets/index.html.erb
+       views/layouts/application.html.erbの
+       <%= yield %> にそれぞれのビューファイルが置き換えられる。
+
+10 cd ~ project/pictweet2
+
+11 rails s
+  ctl + C でシャットダウン
+
+12 commmand + t  :ターミナルで新規タブ作成
+
+13 ･モデルクラス名           Tweet
+   ･モデルクラスのファイル名 tweet.rb
+   ･テーブル名               tweets
+
+14 rails g model モデルクラス名(小文字)(単数)
+
+15 rake db:migrate
+   rake db:rollback
+
+16 rails c (console)
+
+17 app/models/tweett.rb でActiveRecord::Baseを継承
+  class Tweet < ActiveRecord::Base
+･all 全レコードの表示: Tweet.all
+･new レコード生成:tweet = Tweet.new(name: "takeshi", text: "今後ともよろしく!")
+･save 生成したレコードを登録: tweet.save
+･find 指定したidのレコードを取得: Tweet.find(1)
+･create レコード生成･登録Tweet.create(name: "tadashi", text: "今後ともよろしく!")
+
+
+18 レコード更新
+ tweet = Tweet.find(1)
+ tweet.name = kenji
+ tweet.save
+
+19 サーバー立ち上げ
+  cd ~/projects/pictweet2
+  rails s
+
+20 HTMLで複数件表示
+  <% @tweets.each do |tweet| %>
+    <p><%= tweet.text %></p>
+  <% end %>
+
+21 command + /
+  HTML でコメントアウト
+
+22 HTMLでsimple_formatによってツイートの改行を行う
+        <%= simple_format(tweet.text) %>
+        <span class="name"><%= tweet.name %></span>
+
+      <div class="content_post" style="background-image: url(<%= tweet.image %>);">
+        中略
+      </div>
+      によって、ツイートごとにtweet.imageから取得した画像が、背景として使われる。
+
+22 CSSファイルのひも付き順
+   HTMLの stylesheet_link_tag からCSSが読み込まれる。
+  layouts/application.html.erb
+  <%= stylesheet_link_tag 'application'
+   これはapp/assets/stylesheets/application.cssというCSSファイルを読み込むという意味
+
+  app/assets/stylesheets/application.cssの
+  *= require_tree .  はカレントディレクトリ(ドット.) を読み込むという意味
+  app/assets/stylesheets以下のCSSファイルは全て読み込まれる。
+
+23 フォントファイル
+app/assets/stylesheets/style.scssの以下箇所でフォントファイルの指定
+@font-face {
+    font-family: 'ほのか明朝';
+    src: url('font_1_honokamin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+フォントファイルは
+app/assets/fonts に配置
