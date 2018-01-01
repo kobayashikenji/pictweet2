@@ -133,3 +133,29 @@ gemのkaminari
 rails g devise:install
 rails g devise user
 rake db:migrate
+
+html
+<% if user_signed_in? %>
+<% else %>
+<% end %>
+
+27 redirect toメソッド
+アクション内の処理が終了した時に、自動的にアクション名と同名のビューが表示されるのが通常だが、
+別アクションを実行したり、別ビューに遷移させたい場合はこれを使う。
+tweet_contoroller.rb
+redirect_to action: :index
+
+28 before_action
+tweet_contoroller.rb
+before_action :move_to_index, except: :index
+
+29 カラムの追加
+rails g migration AddNicknameToUsers nickname:string
+
+30 HTTPリクエスト
+get    取得
+post   登録
+delete 削除
+patch  更新 rails4からはこちら
+put    patchと同じ役割 rails3まではこちら
+
