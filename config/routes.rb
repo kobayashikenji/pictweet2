@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  get 'tweets'      => 'tweets#index'           #ツイート一覧画面
-  #URLのパス        →  コントローラ#アクション
-
-  get 'tweets/new'  => 'tweets#new'   #ツイート投稿画面
+  devise_for :users
+  root 'tweets#index'
+  get  'tweets'      => 'tweets#index'           #ツイート一覧画面
+   #URLのパス        →  コントローラ#アクション
+  get  'tweets/new'  => 'tweets#new'    #ツイート投稿画面
+  post 'tweets'      => 'tweets#create' #ツイート投稿機能
 
 
   # The priority is based upon order of creation: first created -> highest priority.

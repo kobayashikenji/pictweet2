@@ -1,7 +1,5 @@
 1 rails new アプリケーション名
 
-
-
 3 gem 'gem名'
   #Gemの追加
 
@@ -113,3 +111,25 @@ app/assets/stylesheets/style.scssの以下箇所でフォントファイルの�
 
 フォントファイルは
 app/assets/fonts に配置
+
+24 binding.pry
+ コンソールで
+ params
+ params[:text]
+ exit
+
+25 ページネーション
+  def index
+    @tweets = Tweet.all.order("id DESC").page(params[:page]).per(5)
+  end
+gemのkaminari
+
+  HTML
+    <%= paginate(@tweets) %>
+
+26ログイン機能
+  gem のdevise機能
+
+rails g devise:install
+rails g devise user
+rake db:migrate
